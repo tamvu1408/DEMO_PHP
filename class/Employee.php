@@ -2,7 +2,7 @@
 
 namespace Class;
 
-require_once 'ConnectData.php';
+use ConnectDB\DataSource;
 
 class Employee
 {
@@ -10,22 +10,22 @@ class Employee
 
     public function __construct()
     {
-        $this->conn = new ConnectData();
+        $this->conn = new DataSource();
     }
 
     public function login($username, $password)
     {
-        $login_success = false;
+        $loginSuccess = false;
         $query = "SELECT * FROM employees WHERE username = ?";
         $paramType = "s";
         $paramArray = array($username);
         $user = $this->conn->select($query, $paramType, $paramArray);
         if (!empty($user)) {
             if ($user[0]['password'] === $password && $user[0]['role'] === 1)
-                $login_success = true;
+                $loginSuccess = true;
         }
 
-        return $login_success;
+        return $loginSuccess;
     }
 
     public function getListEmployee()
@@ -44,9 +44,7 @@ class Employee
         $paramType = "i";
         $paramArray = array($id);
         $data = $this->conn->select($query, $paramType, $paramArray);
-        if (!isset($data))
-            return array();
-
+        $data ?? [];
         return $data;
     }
 

@@ -2,7 +2,7 @@
 
 namespace Class;
 
-require_once 'ConnectData.php';
+use ConnectDB\DataSource;
 
 class Department
 {
@@ -10,7 +10,7 @@ class Department
 
     public function __construct()
     {
-        $this->conn = new ConnectData();
+        $this->conn = new DataSource();
     }
 
     public function getList()

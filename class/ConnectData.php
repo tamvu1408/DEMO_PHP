@@ -1,10 +1,10 @@
 <?php
 
-namespace Class;
+namespace ConnectDB;
 
 use mysqli;
 
-class ConnectData
+class DataSource
 {
     const HOST = 'localhost';
     const USERNAME = 'root';
@@ -31,12 +31,12 @@ class ConnectData
 
     public function select($query, $paramType = "", $paramArray = array())
     {
-        $stmt = $this->conn->prepare($query);
+        $statement = $this->conn->prepare($query);
         if (!empty($paramType) && !empty($paramArray)) {
-            $stmt->bind_param($paramType, ...$paramArray); // ? ...
+            $statement->bind_param($paramType, ...$paramArray);
         }
-        $stmt->execute();
-        $data = $stmt->get_result();
+        $statement->execute();
+        $data = $statement->get_result();
         $result = array();
         if ($data->num_rows > 0) {
             while ($row = $data->fetch_assoc()) {
