@@ -1,12 +1,16 @@
 <?php
-    require_once '../../class/Employee.php';
-    require_once '../../class/Department.php';
+require_once '../../Controller/EmployeeController.php';
+require_once '../../Controller/DepartmentController.php';
+require_once '../../Model/Employee/Employee.php';
 
-    use Class\Employee;
-    use Class\Department;
+use Controller\Employee;
+use Controller\Department;
+use Model\Employee\EmployeeModel;
 
-    $departments = new Department();
-    $list_department = $departments->getList();
+$employeeModel = new EmployeeModel();
+$departments = new Department();
+
+$list_department = $departments->getList();
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +31,7 @@
         $department = isset($_POST['department']) ? $_POST['department'] : '';
 
         if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['department'])) {
-            $user = new Employee();
+            $user = new Employee($employeeModel);
             $new_user = $user->create($name, $email, $department);
             echo "Thêm thành công!";
         }

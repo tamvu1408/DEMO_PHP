@@ -1,12 +1,15 @@
 <?php
+require_once '../header.php';
+require_once '../../Model/Employee/Employee.php';
+require_once '../../Controller/EmployeeController.php';
 
-require('../header.php');
-require_once '../../class/Employee.php';
+use Controller\Employee;
+use Model\Employee\EmployeeModel;
 
-use Class\Employee;
+$employeeModel = new EmployeeModel();
 
-$employee = new Employee();
-$list_employees = $employee->getListEmployee();
+$employee = new Employee($employeeModel);
+$list_employees = $employee->getList();
 ?>
 
 <a href="./create.php">Thêm nhân viên</a>

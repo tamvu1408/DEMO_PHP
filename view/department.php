@@ -1,8 +1,8 @@
 <?php
-require_once './header.php';
-require_once '../class/Department.php';
+require_once 'header.php';
+require_once '../Controller/DepartmentController.php';
 
-use Class\Department;
+use Controller\Department;
 
 $departments = new Department();
 $list = $departments->getList();

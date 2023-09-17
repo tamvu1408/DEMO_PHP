@@ -1,19 +1,21 @@
 <?php
 
-namespace Class;
+namespace Model\Department;
 
-use ConnectDB\DataSource;
+require_once __DIR__ . '../../ConnectDB.php';
 
-class Department
+use ConnectDB\ConnectDB;
+
+class DepartmentModel
 {
     protected $conn;
 
     public function __construct()
     {
-        $this->conn = new DataSource();
+        $this->conn = new ConnectDB();
     }
 
-    public function getList()
+    public function getAll()
     {
         $query = "SELECT departments.*, employees.name as manager 
             FROM departments LEFT JOIN employees 

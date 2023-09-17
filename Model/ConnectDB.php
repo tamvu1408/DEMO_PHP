@@ -4,7 +4,7 @@ namespace ConnectDB;
 
 use mysqli;
 
-class DataSource
+class ConnectDB
 {
     const HOST = 'localhost';
     const USERNAME = 'root';
@@ -31,12 +31,12 @@ class DataSource
 
     public function select($query, $paramType = "", $paramArray = array())
     {
-        $statement = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare($query);
         if (!empty($paramType) && !empty($paramArray)) {
-            $statement->bind_param($paramType, ...$paramArray);
+            $stmt->bind_param($paramType, ...$paramArray); // ? ...
         }
-        $statement->execute();
-        $data = $statement->get_result();
+        $stmt->execute();
+        $data = $stmt->get_result();
         $result = array();
         if ($data->num_rows > 0) {
             while ($row = $data->fetch_assoc()) {

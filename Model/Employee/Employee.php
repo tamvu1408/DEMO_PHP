@@ -1,34 +1,35 @@
 <?php
 
-namespace Class;
+namespace Model\Employee;
 
-use ConnectDB\DataSource;
+require_once __DIR__ . '../../Interface/EmployeeInterface.php';
+require_once __DIR__ . '../../ConnectDB.php';
 
-class Employee
+use ConnectDB\ConnectDB;
+use Interface\EmployeeInterface;
+
+class EmployeeModel implements EmployeeInterface
 {
     protected $conn;
+    const ADMIN_ROLE = 1;
 
     public function __construct()
     {
-        $this->conn = new DataSource();
+        $this->conn = new ConnectDB();
     }
 
-    public function login($username, $password)
+    public function findByUsername($username)
     {
-        $loginSuccess = false;
-        $query = "SELECT * FROM employees WHERE username = ?";
+        $query = "SELECT * FROM employees WHERE username = ? AND role = " . self::ADMIN_ROLE;
         $paramType = "s";
         $paramArray = array($username);
         $user = $this->conn->select($query, $paramType, $paramArray);
-        if (!empty($user)) {
-            if ($user[0]['password'] === $password && $user[0]['role'] === 1)
-                $loginSuccess = true;
-        }
+        $user[0] ?? [];
 
-        return $loginSuccess;
+        return $user[0];
     }
 
-    public function getListEmployee()
+    public function getALl()
     {
         $query = "SELECT employees.*, departments.name as department 
             FROM employees LEFT JOIN departments
@@ -38,31 +39,31 @@ class Employee
         return $data;
     }
 
-    public function getEmployee($id)
+    public function find($id)
     {
         $query = "SELECT * FROM employees WHERE id = ?";
         $paramType = "i";
         $paramArray = array($id);
         $data = $this->conn->select($query, $paramType, $paramArray);
-        $data ?? [];
+
         return $data;
     }
 
-    public function create($name, $email, $department_id)
+    public function create($array)
     {
         $query = "INSERT INTO employees (name, email, department_id) VALUES (?, ?, ?)";
         $paramType = "ssi";
-        $paramArray = array($name, $email, $department_id);
+        $paramArray = array($array['name'], $array['email'], $array['department_id']);
         $result = $this->conn->insert($query, $paramType, $paramArray);
 
         return $result;
     }
 
-    public function update($id, $name, $email, $department_id)
+    public function update($id, $array)
     {
         $query = "UPDATE employees SET name = ?, email = ?, department_id = ? WHERE id = ?";
         $paramType = "ssii";
-        $paramArray = array($name, $email, $department_id, $id);
+        $paramArray = array($array['name'], $array['email'], $array['department_id'], $id);
         $result = $this->conn->update($query, $paramType, $paramArray);
 
         return $result;

@@ -1,10 +1,14 @@
 <?php
-    require_once '../../class/Employee.php';
+require_once '../../Controller/EmployeeController.php';
+require_once '../../Model/Employee/Employee.php';
 
-    use Class\Employee;
+use Controller\Employee;
+use Model\Employee\EmployeeModel;
 
-    $employee = new Employee();
+$employeeModel = new EmployeeModel();
 
-    $employee->delete($_GET['user_id']);
+$employee = new Employee($employeeModel);
 
-    header("Location: ./employee.php");
+$employee->delete($_GET['user_id']);
+
+header("Location: ./employee.php");

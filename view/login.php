@@ -1,8 +1,12 @@
 <?php
 
-require_once '../class/Employee.php';
+require_once '../Controller/EmployeeController.php';
+require_once '../Model/Employee/Employee.php';
 
-use Class\Employee;
+use Controller\Employee;
+use Model\Employee\EmployeeModel;
+
+$employeeModel = new EmployeeModel();
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +38,7 @@ use Class\Employee;
             $error['password'] = "Chưa nhập password!";
         }
 
-        $user = new Employee();
+        $user = new Employee($employeeModel);
         $isLoggedIn = $user->login($_POST["username"], $_POST["password"]);
         var_dump($isLoggedIn);
 

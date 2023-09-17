@@ -1,15 +1,18 @@
 <?php
+require_once '../../Controller/EmployeeController.php';
+require_once '../../Controller/DepartmentController.php';
+require_once '../../Model/Employee/Employee.php';
 
-require_once '../../class/Employee.php';
-require_once '../../class/Department.php';
+use Controller\Employee;
+use Controller\Department;
+use Model\Employee\EmployeeModel;
 
-use Class\Employee;
-use Class\Department;
-
+$employeeModel = new EmployeeModel();
 $departments = new Department();
+
 $list_department = $departments->getList();
 
-$employee = new Employee();
+$employee = new Employee($employeeModel);
 $edit_user  = $employee->getEmployee($_GET['user_id']);
 
 if (!isset($edit_user[0])) {
@@ -37,7 +40,7 @@ if (!isset($edit_user[0])) {
         $department = isset($_POST['department']) ? $_POST['department'] : '';
 
         if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['department'])) {
-            $user = new Employee();
+            $user = new Employee($employeeModel);
 
             $update_user = $user->update($_GET['user_id'], $name, $email, $department);
             header("Location: ./employee.php");
@@ -61,7 +64,7 @@ if (!isset($edit_user[0])) {
                     $selected = "selected";
                 }
             ?>
-                <option value="<?php $item['id'] ?>" <?php echo $selected ?>> <?php echo $item['name'] ?></option>
+                <option value="<?php echo $item['id'] ?>" <?php echo $selected ?>> <?php echo $item['name'] ?></option>
             <?php } ?>
         </select>
         <button type="submit" name="edit">Edit</button>
