@@ -2,15 +2,15 @@
 
 namespace Controller;
 
-use Interface\EmployeeInterface;
+use Model\Employee\EmployeeModel;
 
 class EmployeeController
 {
     protected $employeeModel;
 
-    public function __construct(EmployeeInterface $employeeInterface)
+    public function __construct()
     {
-        $this->employeeModel = $employeeInterface;
+        $this->employeeModel = new EmployeeModel();
     }
 
     public function login($username, $password)

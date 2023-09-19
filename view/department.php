@@ -2,9 +2,9 @@
 require_once 'header.php';
 require_once '../Controller/DepartmentController.php';
 
-use Controller\Department;
+use Controller\DepartmentController;
 
-$departments = new Department();
+$departments = new DepartmentController();
 $list = $departments->getList();
 ?>
 

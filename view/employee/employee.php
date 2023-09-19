@@ -1,15 +1,10 @@
 <?php
 require_once '../header.php';
-require_once '../../Model/Employee/EmployeeModel.php';
 require_once '../../Controller/EmployeeController.php';
 
-use Controller\Employee;
 use Controller\EmployeeController;
-use Model\Employee\EmployeeModel;
 
-$employeeModel = new EmployeeModel();
-
-$employee = new EmployeeController($employeeModel);
+$employee = new EmployeeController();
 $list_employees = $employee->getList();
 ?>
 

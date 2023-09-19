@@ -1,18 +1,14 @@
 <?php
 require_once '../../Controller/EmployeeController.php';
 require_once '../../Controller/DepartmentController.php';
-require_once '../../Model/Employee/Employee.php';
 
-use Controller\Employee;
-use Controller\Department;
-use Model\Employee\EmployeeModel;
+use Controller\EmployeeController;
+use Controller\DepartmentController;
 
-$employeeModel = new EmployeeModel();
-$departments = new Department();
-
+$departments = new DepartmentController();
 $list_department = $departments->getList();
 
-$employee = new Employee($employeeModel);
+$employee = new EmployeeController();
 $edit_user  = $employee->getEmployee($_GET['user_id']);
 
 if (!isset($edit_user[0])) {
@@ -40,7 +36,7 @@ if (!isset($edit_user[0])) {
         $department = isset($_POST['department']) ? $_POST['department'] : '';
 
         if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['department'])) {
-            $user = new Employee($employeeModel);
+            $user = new EmployeeController();
 
             $update_user = $user->update($_GET['user_id'], $name, $email, $department);
             header("Location: ./employee.php");

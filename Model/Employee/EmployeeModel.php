@@ -5,8 +5,8 @@ namespace Model\Employee;
 require_once __DIR__ . '../../Interface/EmployeeInterface.php';
 require_once __DIR__ . '../../ConnectDB.php';
 
-use ConnectDB\ConnectDB;
-use Interface\EmployeeInterface;
+use Model\ConnectDB;
+use Model\Interface\EmployeeInterface;
 
 class EmployeeModel implements EmployeeInterface
 {

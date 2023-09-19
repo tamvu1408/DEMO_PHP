@@ -1,6 +1,6 @@
 <?php
 
-namespace Interface;
+namespace Model\Interface;
 
 interface EmployeeInterface
 {

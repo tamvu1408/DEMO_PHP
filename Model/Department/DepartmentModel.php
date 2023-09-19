@@ -4,7 +4,7 @@ namespace Model\Department;
 
 require_once __DIR__ . '../../ConnectDB.php';
 
-use ConnectDB\ConnectDB;
+use Model\ConnectDB;
 
 class DepartmentModel
 {

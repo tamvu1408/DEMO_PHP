@@ -1,6 +1,6 @@
 <?php
 
-namespace ConnectDB;
+namespace Model;
 
 use mysqli;
 

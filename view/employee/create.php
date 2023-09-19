@@ -5,9 +5,7 @@ require_once '../../Model/Employee/Employee.php';
 
 use Controller\EmployeeController;
 use Controller\DepartmentController;
-use Model\Employee\EmployeeModel;
 
-$employeeModel = new EmployeeModel();
 $departments = new DepartmentController();
 
 $list_department = $departments->getList();
@@ -31,7 +29,7 @@ $list_department = $departments->getList();
         $department = isset($_POST['department']) ? $_POST['department'] : '';
 
         if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['department'])) {
-            $user = new EmployeeController($employeeModel);
+            $user = new EmployeeController();
             $new_user = $user->create($name, $email, $department);
             echo "Thêm thành công!";
         }
