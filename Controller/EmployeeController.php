@@ -4,7 +4,7 @@ namespace Controller;
 
 use Interface\EmployeeInterface;
 
-class Employee
+class EmployeeController
 {
     protected $employeeModel;
 

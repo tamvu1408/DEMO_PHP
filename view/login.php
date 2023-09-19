@@ -1,9 +1,9 @@
 <?php
 
 require_once '../Controller/EmployeeController.php';
-require_once '../Model/Employee/Employee.php';
+require_once '../Model/Employee/EmployeeModel.php';
 
-use Controller\Employee;
+use Controller\EmployeeController;
 use Model\Employee\EmployeeModel;
 
 $employeeModel = new EmployeeModel();
@@ -38,7 +38,7 @@ $employeeModel = new EmployeeModel();
             $error['password'] = "Chưa nhập password!";
         }
 
-        $user = new Employee($employeeModel);
+        $user = new EmployeeController($employeeModel);
         $isLoggedIn = $user->login($_POST["username"], $_POST["password"]);
         var_dump($isLoggedIn);
 
@@ -47,7 +47,7 @@ $employeeModel = new EmployeeModel();
         } else {
             session_start();
             $_SESSION['current_user'] = $_POST["username"];
-            header("Location: /demo_php/view/employee/employee.php");
+            header("Location: /demophp/view/employee/employee.php");
         }
     }
     ?>

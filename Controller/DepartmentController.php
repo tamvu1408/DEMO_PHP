@@ -2,11 +2,11 @@
 
 namespace Controller;
 
-require_once __DIR__ . '../../Model/Department/Department.php';
+require_once __DIR__ . '../../Model/Department/DepartmentModel.php';
 
 use Model\Department\DepartmentModel;
 
-class Department
+class DepartmentController
 {
     protected $departmentModel;
 

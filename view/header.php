@@ -2,7 +2,7 @@
 session_start();
 
 if (!$_SESSION['current_user'])
-    header("Location: /demo_php/view/login.php");
+    header("Location: /demophp/view/login.php");
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ if (!$_SESSION['current_user'])
 </head>
 
 <body>
-    <a href="/demo_php/view/employee/employee.php">employees</a>
-    <a href="/demo_php/view/department.php">departments</a>
+    <a href="/demophp/view/employee/employee.php">employees</a>
+    <a href="/demophp/view/department.php">departments</a>
     <span><?php if (isset($_SESSION['current_user'])) echo $_SESSION['current_user'] ?></span>
-    <a href="/demo_php/logout.php">Logout</a>
+    <a href="/demophp/logout.php">Logout</a>
